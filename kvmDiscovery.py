@@ -22,8 +22,11 @@ class kvmDiscovery(object):
       tree = etree.HTML(xml)
       parent_tab = tree.xpath(parent_name)
       for j in parent_tab:
-      	if j.attrib['type'] == 'file':
-      		sdev='source/@file'
+        if j.attrib['type'] == 'file': 
+            if j.attrib['device'] == 'disk':
+                sdev='source/@file'
+            else:
+                continue
         source = j.xpath(sdev)[0]
         target = j.xpath(tdev)[0]
         info = {
